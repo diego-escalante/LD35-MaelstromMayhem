@@ -31,6 +31,8 @@ public class FireAttack : BaseAttack {
     Vector2 direction = -(transform.position - move.Target).normalized;
 
     yield return new WaitForSeconds(delay);
+
+    sound.playAttack();
     
     float timeLeft = stunDuration - delay;
     while(timeLeft > 0) {

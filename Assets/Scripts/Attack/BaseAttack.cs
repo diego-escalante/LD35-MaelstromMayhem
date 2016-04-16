@@ -4,6 +4,7 @@ using System.Collections;
 public class BaseAttack : MonoBehaviour {
 
   protected Movement move;
+  protected SoundController sound;
   protected bool attackReady = true;
 
   protected float stunDuration = 0;
@@ -14,6 +15,7 @@ public class BaseAttack : MonoBehaviour {
 
   protected virtual void Start() {
     move = GetComponent<Movement>();
+    sound = GetComponent<SoundController>();
   }
 
   //===================================================================================================================

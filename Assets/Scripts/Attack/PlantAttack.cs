@@ -18,6 +18,8 @@ public class PlantAttack : BaseAttack {
   public override void attack() {
     if(!attackReady) return;
 
+    sound.playAttack();
+    
     move.StunTime = stunDuration;
     Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, plantAtkRadius);
     foreach(Collider2D candidate in candidates) {

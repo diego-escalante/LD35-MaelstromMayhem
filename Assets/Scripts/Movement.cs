@@ -7,6 +7,8 @@ public class Movement : MonoBehaviour {
   private float speed = 10f;
   private float stunTime = 0;
 
+  private SoundController sound;
+
   public Vector3 Target {get {return target;} set {target = value;}}
   public float StunTime {set {stunTime = value;}}
 
@@ -14,6 +16,7 @@ public class Movement : MonoBehaviour {
 
   private void Start() {
     target = transform.position;
+    sound = GetComponent<SoundController>();
   }
 
   //===================================================================================================================
@@ -47,5 +50,13 @@ public class Movement : MonoBehaviour {
       pos.z = 0;
       transform.position = pos;
     }
+  }
+
+  //===================================================================================================================
+
+  public void die() {
+    sound.playDamage();
+    EventManager.triggerEvent("ElementalDeath");
+    Destroy(gameObject);
   }
 }
