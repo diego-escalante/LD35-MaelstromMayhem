@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour {
   public GameObject fireElemental;
   public GameObject plantElemental;
 
-  private int initialAICount = 0;
+  private int initialAICount = 3;
 
   //===================================================================================================================
 
