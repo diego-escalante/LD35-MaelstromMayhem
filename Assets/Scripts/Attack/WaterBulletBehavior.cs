@@ -26,7 +26,7 @@ public class WaterBulletBehavior : MonoBehaviour {
     Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, bulletRadius);
     foreach(Collider2D candidate in candidates) {
       if(candidate.gameObject.tag == weakTag) {
-        Destroy(candidate.gameObject);
+        candidate.GetComponent<Movement>().die();
         break;
       }
     }

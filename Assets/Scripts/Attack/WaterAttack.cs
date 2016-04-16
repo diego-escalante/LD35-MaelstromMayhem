@@ -26,6 +26,7 @@ public class WaterAttack : BaseAttack {
     move.StunTime = stunDuration;
 
     sound.playAttack();
+    anim.doAttack();
 
     GameObject b = (GameObject)Instantiate(bullet, transform.position, Quaternion.identity);
     b.GetComponent<WaterBulletBehavior>().Direction = -(transform.position - move.Target).normalized;

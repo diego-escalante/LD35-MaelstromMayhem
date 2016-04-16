@@ -33,6 +33,7 @@ public class FireAttack : BaseAttack {
     yield return new WaitForSeconds(delay);
 
     sound.playAttack();
+    anim.doAttack();
     
     float timeLeft = stunDuration - delay;
     while(timeLeft > 0) {
@@ -41,7 +42,7 @@ public class FireAttack : BaseAttack {
       Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, atkRadius);
       foreach(Collider2D candidate in candidates) {
         if(candidate.gameObject.tag == weakTag) {
-          Destroy(candidate.gameObject);
+          candidate.GetComponent<Movement>().die();
         }
       }
       yield return null;
