@@ -19,12 +19,13 @@ public class PlantAttack : BaseAttack {
     if(!attackReady) return;
 
     sound.playAttack();
+    anim.doAttack();
     
     move.StunTime = stunDuration;
     Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, plantAtkRadius);
     foreach(Collider2D candidate in candidates) {
       if(candidate.gameObject.tag == weakTag) {
-        Destroy(candidate.gameObject);
+        candidate.GetComponent<Movement>().die();
       }
     }
 
