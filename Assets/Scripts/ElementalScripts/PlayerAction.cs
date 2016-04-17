@@ -5,6 +5,7 @@ public class PlayerAction : MonoBehaviour {
 
   private Movement move;
   private BaseAttack attack;
+  private UIScript UI;
 
   //===================================================================================================================
 
@@ -12,6 +13,7 @@ public class PlayerAction : MonoBehaviour {
     Camera.main.GetComponent<CamMovement>().Target = transform;
     move = GetComponent<Movement>();
     attack = GetComponent<BaseAttack>();
+    UI = GameObject.FindWithTag("UI").GetComponent<UIScript>();
   }
 
   //===================================================================================================================
@@ -32,6 +34,12 @@ public class PlayerAction : MonoBehaviour {
 
   //===================================================================================================================
 
+  private void Update() {
+    UI.UpdateCooldown(attack.cooldownLeft());
+  }
+
+  //===================================================================================================================
+
   private void setTarget() {
     Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     target.z = transform.position.z;
@@ -41,7 +49,7 @@ public class PlayerAction : MonoBehaviour {
   //===================================================================================================================
 
   private void stopTarget() {
-    move.Target = transform.position;
+    if(move) move.Target = transform.position;
   }
 
   //===================================================================================================================

@@ -64,11 +64,4 @@ public class BaseAI : MonoBehaviour {
 
     target = closest;
   }
-
-  //===================================================================================================================
-
-  private void OnDestroy(){
-    //Put this somewhere else.
-    // EventManager.triggerEvent("ElementalDeath");
-  }
 }

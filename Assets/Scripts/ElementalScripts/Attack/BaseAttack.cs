@@ -9,6 +9,7 @@ public class BaseAttack : MonoBehaviour {
   protected bool attackReady = true;
 
   protected float stunDuration = 0;
+  private float timeLeft = 0;
   protected float attackCooldown = 0;
 
   //===================================================================================================================
@@ -29,11 +30,17 @@ public class BaseAttack : MonoBehaviour {
 
   protected IEnumerator onCooldown() {
     attackReady = false;
-    float timeLeft = attackCooldown;
+    timeLeft = attackCooldown;
     while(timeLeft > 0) {
       timeLeft -= Time.deltaTime;
       yield return null;
     }
     attackReady = true;
+  }
+
+  //===================================================================================================================
+
+  public float cooldownLeft() {
+    return timeLeft/attackCooldown;
   }
 }
