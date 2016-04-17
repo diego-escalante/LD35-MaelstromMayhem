@@ -31,6 +31,7 @@ public class PlantAttack : BaseAttack {
     foreach(Collider2D candidate in candidates) {
       if(candidate.gameObject.tag == weakTag) {
         candidate.GetComponent<ExistenceBase>().die();
+        if(playerAttack) EventManager.triggerEvent("Player Kill");
       }
     }
 

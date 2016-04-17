@@ -29,20 +29,15 @@ public class GameController : MonoBehaviour {
 
   private void startGame() {
     //Kill any preexisting elementals on the board.
-    // StopCoroutine(killElementals());
     ExistenceAI[] elementals = FindObjectsOfType(typeof(ExistenceAI)) as ExistenceAI[];
     foreach(ExistenceAI elemental in elementals) elemental.die();
-
-    // EventManager.startListening("Elemental Death", createElemental);
     createPlayer();
   }
 
   //===================================================================================================================
 
   private void endGame() {
-    // EventManager.stopListening("Elemental Death", createElemental);
     canCreateAI = false;
-    // StartCoroutine(killElementals());
   }
 
   //===================================================================================================================
@@ -73,7 +68,6 @@ public class GameController : MonoBehaviour {
   //===================================================================================================================
 
   private void createElemental() {
-    // print(canCreateAI);
     if(!canCreateAI) return;
     int i = Random.Range(0, 3);
     Vector3 randPos = new Vector3(Random.Range(-25f, 25f), Random.Range(-25f, 25f), 0);

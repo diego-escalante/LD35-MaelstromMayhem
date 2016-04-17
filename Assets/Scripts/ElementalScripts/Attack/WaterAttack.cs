@@ -24,6 +24,7 @@ public class WaterAttack : BaseAttack {
 
     GameObject b = (GameObject)Instantiate(bullet, transform.position, Quaternion.identity);
     b.GetComponent<WaterBulletBehavior>().Direction = -(transform.position - move.Target).normalized;
+    if(GetComponent<ExistencePlayer>()) b.GetComponent<WaterBulletBehavior>().PlayerOwned = true;
 
     StartCoroutine(onCooldown());
   }

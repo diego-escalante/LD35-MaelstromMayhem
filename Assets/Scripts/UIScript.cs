@@ -33,14 +33,14 @@ public class UIScript : MonoBehaviour {
   //===================================================================================================================
 
   private void OnEnable() {
-    EventManager.startListening("Elemental Death", scoreIncrease);
+    EventManager.startListening("Player Kill", scoreIncrease);
     EventManager.startListening("Player Death", pause);
   }
 
   //===================================================================================================================
 
   private void OnDisable() {
-    EventManager.stopListening("Elemental Death", scoreIncrease);
+    EventManager.stopListening("Player Kill", scoreIncrease);
     EventManager.stopListening("Player Death", pause);
   }
 
@@ -75,6 +75,7 @@ public class UIScript : MonoBehaviour {
     scoreText.enabled = false;
 
     finalScoreText.text = "Final Score: " + score;
+    scoreText.text = "SCORE\n0";
     score = 0;
     backButton.SetActive(true);
     againButton.SetActive(true);

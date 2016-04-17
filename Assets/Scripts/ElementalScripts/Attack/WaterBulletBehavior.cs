@@ -10,7 +10,10 @@ public class WaterBulletBehavior : MonoBehaviour {
 
   private string weakTag = "Fire Elemental";
 
+  private bool playerOwned = false;
+
   public Vector2 Direction {set {direction = value;}}
+  public bool PlayerOwned {set {playerOwned = value;}}
 
   //===================================================================================================================
 
@@ -27,7 +30,7 @@ public class WaterBulletBehavior : MonoBehaviour {
     foreach(Collider2D candidate in candidates) {
       if(candidate.gameObject.tag == weakTag) {
         candidate.GetComponent<ExistenceBase>().die();
-        break;
+        if(playerOwned) EventManager.triggerEvent("Player Kill");
       }
     }
   }

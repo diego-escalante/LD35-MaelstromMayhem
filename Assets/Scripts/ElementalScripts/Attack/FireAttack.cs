@@ -44,7 +44,10 @@ public class FireAttack : BaseAttack {
       foreach(Collider2D candidate in candidates) {
         if(candidate.gameObject.tag == weakTag) {
           ExistenceBase ex = candidate.GetComponent<ExistenceBase>();
-          if(!ex.Invulnerable) ex.die();
+          if(!ex.Invulnerable) {
+            ex.die();
+            if(playerAttack) EventManager.triggerEvent("Player Kill");
+          }
         }
       }
       yield return null;
