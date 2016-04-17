@@ -74,7 +74,7 @@ public class UIScript : MonoBehaviour {
     cooldown.enabled = false;
     scoreText.enabled = false;
 
-    finalScoreText.text = "Final Score: " + score;
+    finalScoreText.text = "Final Score: " + score + "\nClick to Restart";
     scoreText.text = "SCORE\n0";
     score = 0;
     backButton.SetActive(true);
