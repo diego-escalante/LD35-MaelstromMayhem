@@ -14,7 +14,7 @@ public class InputManager : MonoBehaviour {
       EventManager.triggerEvent("StopMove");
 
 
-    if(Input.GetButtonDown("Attack"))
+    if(Input.GetButton("Attack"))
       EventManager.triggerEvent("Attack");
   }
 }
