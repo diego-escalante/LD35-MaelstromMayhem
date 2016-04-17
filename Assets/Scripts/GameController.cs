@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
   private bool canCreateAI = false;
 
   private int initialAICount = 5;
+  private float spawnRate = 2f;
 
   private Vector3 spawnPoint = Vector3.zero;
 
@@ -38,6 +39,7 @@ public class GameController : MonoBehaviour {
 
   private void endGame() {
     canCreateAI = false;
+    CancelInvoke();
   }
 
   //===================================================================================================================
@@ -45,6 +47,7 @@ public class GameController : MonoBehaviour {
   private void spawnElementals() {
     canCreateAI = true;
     for(int i = 0; i < initialAICount; i++) createElemental();
+    InvokeRepeating("createElemental", spawnRate, spawnRate);
   }
 
   //===================================================================================================================

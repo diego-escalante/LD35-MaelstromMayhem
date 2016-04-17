@@ -9,7 +9,7 @@ public class WaterAttack : BaseAttack {
 
   protected override void Awake() {
     base.Awake();
-    stunDuration = 0.25f;
+    stunDuration = 0.1f;
     attackCooldown = 0.25f;
   }
 
