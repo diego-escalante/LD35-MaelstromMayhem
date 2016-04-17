@@ -13,7 +13,7 @@ public class PlantAttack : BaseAttack {
   protected override void Awake() {
     base.Awake();
     stunDuration = 0.5f;
-    attackCooldown = 0.5f;
+    attackCooldown = 1f;
 
     ex = GetComponent<ExistenceBase>();
   }
