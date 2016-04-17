@@ -49,7 +49,7 @@ public class PlayerAction : MonoBehaviour {
   //===================================================================================================================
 
   private void stopTarget() {
-    move.Target = transform.position;
+    if(move) move.Target = transform.position;
   }
 
   //===================================================================================================================

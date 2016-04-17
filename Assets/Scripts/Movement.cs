@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour {
 
   //===================================================================================================================
 
-  private void Start() {
+  private void Awake() {
     target = transform.position;
     sound = GetComponent<SoundController>();
   }
@@ -25,6 +25,20 @@ public class Movement : MonoBehaviour {
     if(stunTime > 0) stunTime -= Time.deltaTime;
     else move();
     keepInsideArena();
+  }
+
+  //===================================================================================================================
+
+  private void OnEnable() {
+    EventManager.startListening("Player Death", selfDestruct);
+    EventManager.startListening("Start Game", dieNow);
+  }
+
+  //===================================================================================================================
+
+  private void OnDisable() {
+    EventManager.stopListening("Player Death", selfDestruct);
+    EventManager.stopListening("Start Game", dieNow);
   }
 
   //===================================================================================================================
@@ -58,8 +72,28 @@ public class Movement : MonoBehaviour {
     sound.playDamage();
     if(GetComponent<PlayerAction>()) {
       EventManager.triggerEvent("Player Death");
+      transform.Find("Epic PS").GetComponent<ParticleSystem>().Play();
+      transform.Find("Epic PS").parent = null;
+      GameObject.FindWithTag("GameController").GetComponent<GameController>().spawnPoint = transform.position;
     }
-    else EventManager.triggerEvent("Elemental Death");
+    else {
+      EventManager.triggerEvent("Elemental Death");
+      transform.Find("Shapeshift PS").GetComponent<ParticleSystem>().Play();
+      transform.Find("Shapeshift PS").parent = null;
+    }
+    Destroy(gameObject);
+  }
+
+  //===================================================================================================================
+
+  private void selfDestruct() {
+    Invoke("dieNow", Random.Range(1f, 4f));
+  }
+
+  //===================================================================================================================
+
+  private void dieNow() {
+    sound.playDamage();
     Destroy(gameObject);
   }
 }

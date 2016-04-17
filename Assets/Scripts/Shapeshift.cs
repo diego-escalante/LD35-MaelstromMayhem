@@ -63,6 +63,8 @@ public class Shapeshift : MonoBehaviour {
       
       GameObject newGuy = Instantiate(chosenElemental, transform.position, Quaternion.identity) as GameObject;
 
+      newGuy.transform.Find("Shapeshift PS").GetComponent<ParticleSystem>().Play();
+
       if(isPlayer) {
         Destroy(newGuy.GetComponent<BaseAI>());
         newGuy.AddComponent<PlayerAction>();

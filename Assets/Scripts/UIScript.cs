@@ -75,6 +75,7 @@ public class UIScript : MonoBehaviour {
     scoreText.enabled = false;
 
     finalScoreText.text = "Final Score: " + score;
+    score = 0;
     backButton.SetActive(true);
     againButton.SetActive(true);
   }
@@ -96,6 +97,19 @@ public class UIScript : MonoBehaviour {
 
   public void clickBack() {
     StartCoroutine(goBack());
+  }
+
+  //===================================================================================================================
+
+  public void clickAgain() {
+    EventManager.triggerEvent("Start Game");
+    StartCoroutine(fadeIn());
+    cooldown.enabled = true;
+    scoreText.enabled = true;
+
+    finalScoreText.text = "";
+    backButton.SetActive(false);
+    againButton.SetActive(false);
   }
 	
   //===================================================================================================================
