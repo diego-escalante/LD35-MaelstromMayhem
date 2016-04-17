@@ -13,6 +13,8 @@ public class ExistenceBase : MonoBehaviour {
 
   private SoundController sound;
 
+  protected IEnumerator asyncShapeshift;
+
   protected bool invulnerable = false;
   public bool Invulnerable {get;set;}
 
@@ -28,7 +30,8 @@ public class ExistenceBase : MonoBehaviour {
     spawnPS = transform.Find("Spawn PS").gameObject;
     sound = GetComponent<SoundController>();
 
-    StartCoroutine(shapeshift());
+    asyncShapeshift = shapeshift();
+    StartCoroutine(asyncShapeshift);
   }
 
   //===================================================================================================================

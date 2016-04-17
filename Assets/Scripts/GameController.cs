@@ -11,7 +11,9 @@ public class GameController : MonoBehaviour {
   public GameObject firePlayer;
   public GameObject plantPlayer;
 
-  private int initialAICount = 1;
+  private bool canCreateAI = false;
+
+  private int initialAICount = 5;
 
   private Vector3 spawnPoint = Vector3.zero;
 
@@ -27,30 +29,33 @@ public class GameController : MonoBehaviour {
 
   private void startGame() {
     //Kill any preexisting elementals on the board.
-    StopCoroutine(killElementals());
+    // StopCoroutine(killElementals());
     ExistenceAI[] elementals = FindObjectsOfType(typeof(ExistenceAI)) as ExistenceAI[];
     foreach(ExistenceAI elemental in elementals) elemental.die();
 
-    EventManager.startListening("Elemental Death", createElemental);
+    // EventManager.startListening("Elemental Death", createElemental);
     createPlayer();
   }
 
   //===================================================================================================================
 
   private void endGame() {
-    EventManager.stopListening("Elemental Death", createElemental);
-    StartCoroutine(killElementals());
+    // EventManager.stopListening("Elemental Death", createElemental);
+    canCreateAI = false;
+    // StartCoroutine(killElementals());
   }
 
   //===================================================================================================================
 
   private void spawnElementals() {
+    canCreateAI = true;
     for(int i = 0; i < initialAICount; i++) createElemental();
   }
 
   //===================================================================================================================
 
   private void OnEnable() {
+    EventManager.startListening("Elemental Death", createElemental);
     EventManager.startListening("Start Game", startGame);
     EventManager.startListening("Player Spawned", spawnElementals);
     EventManager.startListening("Player Death", endGame);
@@ -68,6 +73,8 @@ public class GameController : MonoBehaviour {
   //===================================================================================================================
 
   private void createElemental() {
+    // print(canCreateAI);
+    if(!canCreateAI) return;
     int i = Random.Range(0, 3);
     Vector3 randPos = new Vector3(Random.Range(-25f, 25f), Random.Range(-25f, 25f), 0);
 
@@ -77,20 +84,6 @@ public class GameController : MonoBehaviour {
     else g = (GameObject)Instantiate(plantElemental, randPos, Quaternion.identity);
     g.GetComponent<ExistenceBase>().spawn();
 
-  }
-
-  //===================================================================================================================
-
-  private IEnumerator killElementals() {
-    yield return new WaitForSeconds(1f);
-    ExistenceAI[] elementals = FindObjectsOfType(typeof(ExistenceAI)) as ExistenceAI[];
-    foreach(ExistenceAI elemental in elementals) {
-      yield return new WaitForSeconds(0.25f);
-      if(elemental) elemental.die();
-    }
-
-    elementals = FindObjectsOfType(typeof(ExistenceAI)) as ExistenceAI[];
-    foreach(ExistenceAI elemental in elementals) elemental.die();
   }
 
   //===================================================================================================================
