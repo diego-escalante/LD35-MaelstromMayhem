@@ -14,9 +14,9 @@ public class ExistenceAI : ExistenceBase {
   //===================================================================================================================
 
   protected override IEnumerator spawnSequence(){
+    // yield return new WaitForSeconds(5f);
     yield return null;
     normalPS.GetComponent<ParticleSystem>().Play();
-    EventManager.triggerEvent("Elemental Spawned");
   }
 
   //===================================================================================================================
@@ -26,7 +26,7 @@ public class ExistenceAI : ExistenceBase {
     normalPS.GetComponent<ParticleSystem>().Play();
     normalPS.transform.parent = null;
     
-    Destroy(normalPS, 10);
+    Destroy(normalPS, 4);
     Destroy(gameObject);
 
     EventManager.triggerEvent("Elemental Death");

@@ -10,7 +10,7 @@ public class AnimationController : MonoBehaviour {
 
   //===================================================================================================================
 
-  private void Start() {
+  private void Awake() {
     anim = GetComponent<Animator>();
     move = GetComponent<Movement>();
   }

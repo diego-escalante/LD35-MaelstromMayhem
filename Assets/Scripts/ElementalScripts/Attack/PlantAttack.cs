@@ -8,7 +8,8 @@ public class PlantAttack : BaseAttack {
 
   //===================================================================================================================
 
-  private void Awake() {
+  protected override void Awake() {
+    base.Awake();
     stunDuration = 0.5f;
     attackCooldown = 0.5f;
   }

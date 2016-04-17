@@ -5,6 +5,7 @@ public class ExistenceBase : MonoBehaviour {
 
   private int currentForm;
   protected GameObject normalPS;
+  protected GameObject spawnPS;
   
   protected GameObject waterElemental; 
   protected GameObject fireElemental;  
@@ -21,14 +22,17 @@ public class ExistenceBase : MonoBehaviour {
     else currentForm = 2;
 
     normalPS = transform.Find("Shapeshift PS").gameObject;
+    spawnPS = transform.Find("Spawn PS").gameObject;
     sound = GetComponent<SoundController>();
+
+    StartCoroutine(shapeshift());
   }
 
   //===================================================================================================================
 
   public void spawn() {
     StartCoroutine(spawnSequence());
-    Invoke("shapeshift", Random.Range(5f, 15f));
+    // Invoke("shapeshift", Random.Range(5f, 10f));
   }
 
   //===================================================================================================================
@@ -46,11 +50,21 @@ public class ExistenceBase : MonoBehaviour {
 
   //===================================================================================================================
 
-  private void shapeshift() {
+  public IEnumerator shapeshift() {
+    yield return new WaitForSeconds(Random.Range(0f,10f));
+
     int newForm;
     do {
       newForm = Random.Range(0, 3);
     } while (newForm == currentForm);
+
+    ParticleSystem SPS = spawnPS.GetComponent<ParticleSystem>();
+
+    Color[] cs = {new Color(42/255f,161/255f,180/255f), new Color(255/255f,100/255f,0f), new Color(0f, 255/255f, 0)};
+    SPS.startColor = cs[newForm];
+    SPS.Play();
+
+    yield return new WaitForSeconds(5f);
 
     GameObject newElemental = createElemental(newForm, transform.position);
     newElemental.GetComponent<ExistenceBase>().emitShapeParticles();

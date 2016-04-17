@@ -7,8 +7,6 @@ public class Movement : MonoBehaviour {
   private float speed = 10f;
   private float stunTime = 0;
 
-  private SoundController sound;
-
   public Vector3 Target {get {return target;} set {target = value;}}
   public float StunTime {set {stunTime = value;}}
 
@@ -16,7 +14,6 @@ public class Movement : MonoBehaviour {
 
   private void Awake() {
     target = transform.position;
-    sound = GetComponent<SoundController>();
   }
 
   //===================================================================================================================
