@@ -3,7 +3,7 @@ using System.Collections;
 
 public class WaterAttack : BaseAttack {
 
-  private GameObject bullet;
+  public GameObject bullet;
 
   //===================================================================================================================
 
@@ -11,12 +11,6 @@ public class WaterAttack : BaseAttack {
     base.Awake();
     stunDuration = 0.25f;
     attackCooldown = 0.25f;
-  }
-
-  //===================================================================================================================
-
-  protected void Start() {
-    bullet = Resources.Load("Water Bullet") as GameObject;
   }
 
   //===================================================================================================================

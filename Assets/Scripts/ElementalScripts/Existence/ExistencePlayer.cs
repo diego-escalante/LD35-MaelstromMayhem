@@ -10,9 +10,6 @@ public class ExistencePlayer : ExistenceBase {
   protected override void Awake() {
     
     epicPS = transform.Find("Epic PS").gameObject;
-    waterElemental = Resources.Load("Player/Water Player") as GameObject;
-    fireElemental = Resources.Load("Player/Fire Player") as GameObject;
-    plantElemental = Resources.Load("Player/Plant Player") as GameObject;
     base.Awake();
   }
 

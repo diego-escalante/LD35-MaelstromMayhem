@@ -7,9 +7,9 @@ public class ExistenceBase : MonoBehaviour {
   protected GameObject normalPS;
   protected GameObject spawnPS;
   
-  protected GameObject waterElemental; 
-  protected GameObject fireElemental;  
-  protected GameObject plantElemental; 
+  public GameObject waterElemental; 
+  public GameObject fireElemental;  
+  public GameObject plantElemental; 
 
   private SoundController sound;
 
