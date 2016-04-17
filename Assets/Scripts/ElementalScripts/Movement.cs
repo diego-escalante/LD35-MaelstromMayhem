@@ -7,8 +7,6 @@ public class Movement : MonoBehaviour {
   private float speed = 10f;
   private float stunTime = 0;
 
-  private SoundController sound;
-
   public Vector3 Target {get {return target;} set {target = value;}}
   public float StunTime {set {stunTime = value;}}
 
@@ -16,7 +14,6 @@ public class Movement : MonoBehaviour {
 
   private void Awake() {
     target = transform.position;
-    sound = GetComponent<SoundController>();
   }
 
   //===================================================================================================================
@@ -25,20 +22,6 @@ public class Movement : MonoBehaviour {
     if(stunTime > 0) stunTime -= Time.deltaTime;
     else move();
     keepInsideArena();
-  }
-
-  //===================================================================================================================
-
-  private void OnEnable() {
-    EventManager.startListening("Player Death", selfDestruct);
-    EventManager.startListening("Start Game", dieNow);
-  }
-
-  //===================================================================================================================
-
-  private void OnDisable() {
-    EventManager.stopListening("Player Death", selfDestruct);
-    EventManager.stopListening("Start Game", dieNow);
   }
 
   //===================================================================================================================
@@ -64,36 +47,5 @@ public class Movement : MonoBehaviour {
       pos.z = 0;
       transform.position = pos;
     }
-  }
-
-  //===================================================================================================================
-
-  public void die() {
-    sound.playDamage();
-    if(GetComponent<PlayerAction>()) {
-      EventManager.triggerEvent("Player Death");
-      transform.Find("Epic PS").GetComponent<ParticleSystem>().Play();
-      transform.Find("Epic PS").parent = null;
-      GameObject.FindWithTag("GameController").GetComponent<GameController>().spawnPoint = transform.position;
-    }
-    else {
-      EventManager.triggerEvent("Elemental Death");
-      transform.Find("Shapeshift PS").GetComponent<ParticleSystem>().Play();
-      transform.Find("Shapeshift PS").parent = null;
-    }
-    Destroy(gameObject);
-  }
-
-  //===================================================================================================================
-
-  private void selfDestruct() {
-    Invoke("dieNow", Random.Range(1f, 4f));
-  }
-
-  //===================================================================================================================
-
-  private void dieNow() {
-    sound.playDamage();
-    Destroy(gameObject);
   }
 }

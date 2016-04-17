@@ -14,7 +14,7 @@ public class BaseAttack : MonoBehaviour {
 
   //===================================================================================================================
 
-  protected virtual void Start() {
+  protected virtual void Awake() {
     move = GetComponent<Movement>();
     sound = GetComponent<SoundController>();
     anim = GetComponent<AnimationController>();

@@ -7,15 +7,15 @@ public class WaterAttack : BaseAttack {
 
   //===================================================================================================================
 
-  private void Awake() {
+  protected override void Awake() {
+    base.Awake();
     stunDuration = 0.25f;
     attackCooldown = 0.25f;
   }
 
   //===================================================================================================================
 
-  protected override void Start() {
-    base.Start();
+  protected void Start() {
     bullet = Resources.Load("Water Bullet") as GameObject;
   }
 

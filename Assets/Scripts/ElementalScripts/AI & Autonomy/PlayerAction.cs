@@ -43,7 +43,7 @@ public class PlayerAction : MonoBehaviour {
   private void setTarget() {
     Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     target.z = transform.position.z;
-    move.Target = target;
+    if(move) move.Target = target;
   }
 
   //===================================================================================================================
