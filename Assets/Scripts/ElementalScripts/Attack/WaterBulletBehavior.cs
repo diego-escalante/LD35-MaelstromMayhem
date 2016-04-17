@@ -21,7 +21,7 @@ public class WaterBulletBehavior : MonoBehaviour {
   //===================================================================================================================
 
   private void Update() {
-    transform.Translate(direction * speed * Time.deltaTime);
+    transform.position = transform.position + (Vector3)direction * speed * Time.deltaTime;
 
     Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, bulletRadius);
     foreach(Collider2D candidate in candidates) {
