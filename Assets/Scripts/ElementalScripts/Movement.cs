@@ -5,6 +5,7 @@ public class Movement : MonoBehaviour {
 
   private Vector3 target = Vector3.zero;
   private float speed = 10f;
+  private float boostFraction = 0.2f;
   private float stunTime = 0;
 
   public Vector3 Target {get {return target;} set {target = value;}}
@@ -14,6 +15,9 @@ public class Movement : MonoBehaviour {
 
   private void Awake() {
     target = transform.position;
+
+    //The player is special. It is faster. Deal with it. :(
+    if(GetComponent<ExistencePlayer>()) speed += speed * boostFraction;
   }
 
   //===================================================================================================================
