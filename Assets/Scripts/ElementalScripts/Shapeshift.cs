@@ -18,9 +18,9 @@ public class Shapeshift : MonoBehaviour {
 
   private void Start() {
     isPlayer = (GetComponent<PlayerAction>());
-    waterElemental = Resources.Load("Water Elemental") as GameObject;
-    fireElemental = Resources.Load("Fire Elemental") as GameObject;
-    plantElemental = Resources.Load("Plant Elemental") as GameObject;
+    waterElemental = Resources.Load("AI/Water AI") as GameObject;
+    fireElemental = Resources.Load("AI/Fire AI") as GameObject;
+    plantElemental = Resources.Load("AI/Plant AI") as GameObject;
 
     string formTag = gameObject.tag;
     switch(formTag) {

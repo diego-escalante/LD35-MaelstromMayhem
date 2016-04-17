@@ -25,7 +25,7 @@ public class PlantAttack : BaseAttack {
     Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, plantAtkRadius);
     foreach(Collider2D candidate in candidates) {
       if(candidate.gameObject.tag == weakTag) {
-        candidate.GetComponent<Movement>().die();
+        candidate.GetComponent<ExistenceBase>().die();
       }
     }
 

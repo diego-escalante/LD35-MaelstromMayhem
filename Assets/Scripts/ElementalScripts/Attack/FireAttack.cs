@@ -42,7 +42,7 @@ public class FireAttack : BaseAttack {
       Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, atkRadius);
       foreach(Collider2D candidate in candidates) {
         if(candidate.gameObject.tag == weakTag) {
-          candidate.GetComponent<Movement>().die();
+          candidate.GetComponent<ExistenceBase>().die();
         }
       }
       yield return null;
