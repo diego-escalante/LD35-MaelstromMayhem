@@ -56,7 +56,10 @@ public class Movement : MonoBehaviour {
 
   public void die() {
     sound.playDamage();
-    EventManager.triggerEvent("ElementalDeath");
+    if(GetComponent<PlayerAction>()) {
+      EventManager.triggerEvent("Player Death");
+    }
+    else EventManager.triggerEvent("Elemental Death");
     Destroy(gameObject);
   }
 }

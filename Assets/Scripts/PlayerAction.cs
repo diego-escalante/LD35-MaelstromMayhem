@@ -5,6 +5,7 @@ public class PlayerAction : MonoBehaviour {
 
   private Movement move;
   private BaseAttack attack;
+  private UIScript UI;
 
   //===================================================================================================================
 
@@ -12,6 +13,7 @@ public class PlayerAction : MonoBehaviour {
     Camera.main.GetComponent<CamMovement>().Target = transform;
     move = GetComponent<Movement>();
     attack = GetComponent<BaseAttack>();
+    UI = GameObject.FindWithTag("UI").GetComponent<UIScript>();
   }
 
   //===================================================================================================================
@@ -28,6 +30,12 @@ public class PlayerAction : MonoBehaviour {
     EventManager.stopListening("Move", setTarget);
     EventManager.stopListening("StopMove", stopTarget);
     EventManager.stopListening("Attack", doAttack);
+  }
+
+  //===================================================================================================================
+
+  private void Update() {
+    UI.UpdateCooldown(attack.cooldownLeft());
   }
 
   //===================================================================================================================

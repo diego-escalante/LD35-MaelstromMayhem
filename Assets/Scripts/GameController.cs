@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour {
   public GameObject fireElemental;
   public GameObject plantElemental;
 
-  private int initialAICount = 0;
+  private int initialAICount = 5;
 
   //===================================================================================================================
 
@@ -18,13 +18,13 @@ public class GameController : MonoBehaviour {
   //===================================================================================================================
 
   private void OnEnable() {
-    EventManager.startListening("ElementalDeath", createElemental);
+    EventManager.startListening("Elemental Death", createElemental);
   }
 
   //===================================================================================================================
 
   private void OnDisable() {
-    EventManager.stopListening("ElementalDeath", createElemental);
+    EventManager.stopListening("Elemental Death", createElemental);
   }
 
   //===================================================================================================================
