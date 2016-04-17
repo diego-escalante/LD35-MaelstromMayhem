@@ -6,12 +6,16 @@ public class PlantAttack : BaseAttack {
   private float plantAtkRadius = 3f;
   private string weakTag = "Water Elemental";
 
+  private ExistenceBase ex;
+
   //===================================================================================================================
 
   protected override void Awake() {
     base.Awake();
     stunDuration = 0.5f;
     attackCooldown = 0.5f;
+
+    ex = GetComponent<ExistenceBase>();
   }
 
   //===================================================================================================================
@@ -30,7 +34,16 @@ public class PlantAttack : BaseAttack {
       }
     }
 
+    StartCoroutine(vulnerability());
     StartCoroutine(onCooldown());
+  }
+
+  //===================================================================================================================
+
+  private IEnumerator vulnerability() {
+    ex.Invulnerable = true;
+    yield return new WaitForSeconds(stunDuration);
+    ex.Invulnerable = false;
   }
 }
 

@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour {
   public GameObject firePlayer;
   public GameObject plantPlayer;
 
-  private int initialAICount = 5;
+  private int initialAICount = 1;
 
   private Vector3 spawnPoint = Vector3.zero;
 

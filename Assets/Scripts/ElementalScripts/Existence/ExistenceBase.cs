@@ -13,6 +13,9 @@ public class ExistenceBase : MonoBehaviour {
 
   private SoundController sound;
 
+  protected bool invulnerable = false;
+  public bool Invulnerable {get;set;}
+
   //===================================================================================================================
 
   protected virtual void Awake() {
