@@ -23,7 +23,9 @@ public class WaterAttack : BaseAttack {
     anim.doAttack();
 
     GameObject b = (GameObject)Instantiate(bullet, transform.position, Quaternion.identity);
-    b.GetComponent<WaterBulletBehavior>().Direction = -(transform.position - move.Target).normalized;
+    Vector2 dirdir = -(transform.position - move.Target).normalized;
+    if(dirdir == Vector2.zero) dirdir = -((Vector2)transform.position - (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
+    b.GetComponent<WaterBulletBehavior>().Direction = dirdir;
     if(GetComponent<ExistencePlayer>()) b.GetComponent<WaterBulletBehavior>().PlayerOwned = true;
 
     StartCoroutine(onCooldown());

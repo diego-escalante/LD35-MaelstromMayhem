@@ -30,6 +30,12 @@ public class FireAttack : BaseAttack {
 
   private IEnumerator dash() {
     Vector2 direction = -(transform.position - move.Target).normalized;
+    bool panicBool = false;
+    if(direction == Vector2.zero) {
+      direction = -((Vector2)transform.position - (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
+      panicBool = true;
+    }
+    // Vector2 direction = -(transform.position - move.Target).normalized;
 
     yield return new WaitForSeconds(delay);
 
@@ -40,6 +46,7 @@ public class FireAttack : BaseAttack {
     while(timeLeft > 0) {
       timeLeft -= Time.deltaTime;
       transform.Translate(direction * dashSpeed * Time.deltaTime);
+      if(panicBool) move.Target = transform.position;
       Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, atkRadius);
       foreach(Collider2D candidate in candidates) {
         if(candidate.gameObject.tag == weakTag) {
