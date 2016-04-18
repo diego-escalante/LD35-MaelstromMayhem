@@ -23,7 +23,7 @@ public class PlantAttack : BaseAttack {
   public override void attack() {
     if(!attackReady) return;
 
-    sound.playAttack();
+    sound.playAttack(playerAttack);
     anim.doAttack();
     
     move.StunTime = stunDuration;

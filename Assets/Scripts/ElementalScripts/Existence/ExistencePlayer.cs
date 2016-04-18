@@ -44,7 +44,7 @@ public class ExistencePlayer : ExistenceBase {
   //===================================================================================================================
 
   public override void die() {
-    base.die();
+    sound.playDamage(true);
     GameObject.FindWithTag("GameController").GetComponent<GameController>().SpawnPoint = transform.position;
     epicPS.GetComponent<ParticleSystem>().Play();
     epicPS.transform.parent = null;

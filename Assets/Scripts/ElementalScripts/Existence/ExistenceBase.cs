@@ -51,7 +51,7 @@ public class ExistenceBase : MonoBehaviour {
   //===================================================================================================================
 
   public virtual void die() {
-    sound.playDamage();
+    Debug.LogError("This shouldn't happen. Check the children.");
   }
 
   //===================================================================================================================

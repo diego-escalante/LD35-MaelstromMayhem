@@ -9,7 +9,7 @@ public class HighTracker : MonoBehaviour {
 
   //===================================================================================================================
 
-  void Awake() {
+  private void Awake() {
     DontDestroyOnLoad(transform.gameObject);
   }
 

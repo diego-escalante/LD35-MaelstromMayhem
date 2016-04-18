@@ -7,27 +7,39 @@ public class SoundController : MonoBehaviour {
   public AudioClip damageSound;
   public AudioClip chargeSound;
 
+  private AudioSource aSource;
+
   //===================================================================================================================
 
-  public void playAttack(){
-    playSound(atkSound);
+  private void Start() {
+    aSource = Camera.main.GetComponent<AudioSource>();
   }
 
   //===================================================================================================================
 
-  public void playDamage(){
-    playSound(damageSound);
+  public void playAttack(bool global=false){
+    playSound(atkSound, global);
   }
 
   //===================================================================================================================
 
-  public void playCharge(){
-    playSound(chargeSound);
+  public void playDamage(bool global=false){
+    playSound(damageSound, global);
   }
 
   //===================================================================================================================
 
-  private void playSound(AudioClip clip) {
+  public void playCharge(bool global=false){
+    playSound(chargeSound, global);
+  }
+
+  //===================================================================================================================
+
+  private void playSound(AudioClip clip, bool global=false) {
+    if(global) {
+      aSource.PlayOneShot(clip);
+      return;
+    }
     Vector3 pos = transform.position;
     pos.z = Camera.main.transform.position.z;
     AudioSource.PlayClipAtPoint(clip, pos);
