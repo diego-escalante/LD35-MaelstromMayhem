@@ -10,18 +10,26 @@ public class CamShake : MonoBehaviour {
 
   private void OnEnable() {
     EventManager.startListening("Player Death", playerDeath);
+    EventManager.startListening("Player Kill", playerKill);
   }
 
   //===================================================================================================================
 
   private void OnDisable() {
     EventManager.stopListening("Player Death", playerDeath);
+    EventManager.stopListening("Player Kill", playerKill);
   }
 
   //===================================================================================================================
 
   private void playerDeath() {
     if(doneShaking) StartCoroutine(shake(30, 1.5f, 0.01f, true, Vector2.zero));
+  }
+
+  //===================================================================================================================
+
+    private void playerKill() {
+    if(doneShaking) StartCoroutine(shake(15, 1f, 0.01f, true, Vector2.zero));
   }
 
   //===================================================================================================================
