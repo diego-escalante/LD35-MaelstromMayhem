@@ -9,7 +9,7 @@ public class BackgroundShifter : MonoBehaviour {
 
   private SpriteRenderer bg;
 
-  private int multi = 0;
+  private int multi = 1;
 
 
 
@@ -18,6 +18,7 @@ public class BackgroundShifter : MonoBehaviour {
   private void Start() {
     oH = Random.Range(0,360);
     bg = GetComponent<SpriteRenderer>();
+    // transform.Rotate(0,0,Random.Range(0,360));
   }
 
   //===================================================================================================================
@@ -40,10 +41,11 @@ public class BackgroundShifter : MonoBehaviour {
     oH += Time.deltaTime * 10 * multi;
     if(oH > 360) oH -= 360;
     bg.color = Color.HSVToRGB(oH/360f, oS/255f, oV/255f);
+    transform.Rotate(0,0,-Time.deltaTime * multi/2);
   }
 
   //===================================================================================================================
 
   private void increaseMultiplier() {multi++;}
-  private void resetMultiplier() {multi=0;}
+  private void resetMultiplier() {multi=1;}
 }
