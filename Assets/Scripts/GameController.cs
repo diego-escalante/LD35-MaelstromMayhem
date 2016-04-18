@@ -91,8 +91,8 @@ public class GameController : MonoBehaviour {
 
     GameObject g;
     if(i == 0) g = (GameObject)Instantiate(waterPlayer, spawnPoint, Quaternion.identity);
-    else if(i == 1) g = (GameObject)Instantiate(plantPlayer, spawnPoint, Quaternion.identity);
-    else g = (GameObject)Instantiate(firePlayer, spawnPoint, Quaternion.identity);
+    else if(i == 1) g = (GameObject)Instantiate(firePlayer, spawnPoint, Quaternion.identity);
+    else g = (GameObject)Instantiate(plantPlayer, spawnPoint, Quaternion.identity);
     g.GetComponent<ExistenceBase>().spawn();
     GameObject.FindWithTag("UI").GetComponent<UIScript>().swapIcon(i);
   }
