@@ -70,7 +70,7 @@ public class ExistenceBase : MonoBehaviour {
     SPS.startColor = cs[newForm];
     SPS.Play();
 
-    yield return new WaitForSeconds(5f);
+    yield return new WaitForSeconds(2.55f);
 
     GameObject newElemental = createElemental(newForm, transform.position);
     newElemental.GetComponent<ExistenceBase>().emitShapeParticles();
