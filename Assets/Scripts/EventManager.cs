@@ -11,7 +11,10 @@ public class EventManager : MonoBehaviour {
 
   //===================================================================================================================
 
-  private void Awake() {DontDestroyOnLoad(transform.gameObject);}
+  private void Awake() { 
+    DontDestroyOnLoad(transform.gameObject); 
+    if(GameObject.FindGameObjectsWithTag("Event System").Length > 1) Destroy(gameObject);
+  }
 
   //===================================================================================================================
 

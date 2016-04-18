@@ -3,10 +3,11 @@ using System.Collections;
 
 public class PlantAttack : BaseAttack {
 
-  private float plantAtkRadius = 3f;
-  private string weakTag = "Water Elemental";
+  // private float plantAtkRadius = 3f;
+  // private string weakTag = "Water Elemental";
 
   private ExistenceBase ex;
+  public GameObject spin;
 
   //===================================================================================================================
 
@@ -27,13 +28,18 @@ public class PlantAttack : BaseAttack {
     anim.doAttack();
     
     move.StunTime = stunDuration;
-    Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, plantAtkRadius);
-    foreach(Collider2D candidate in candidates) {
-      if(candidate.gameObject.tag == weakTag) {
-        candidate.GetComponent<ExistenceBase>().die();
-        if(playerAttack) EventManager.triggerEvent("Player Kill");
-      }
-    }
+
+    GameObject b = (GameObject)Instantiate(spin, transform.position, Quaternion.identity);
+    // b.GetComponent<PlantSpinBehavior>().Direction = -(transform.position - move.Target).normalized;
+    if(GetComponent<ExistencePlayer>()) b.GetComponent<PlantSpinBehavior>().PlayerOwned = true;
+
+    // Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, plantAtkRadius);
+    // foreach(Collider2D candidate in candidates) {
+    //   if(candidate.gameObject.tag == weakTag) {
+    //     candidate.GetComponent<ExistenceBase>().die();
+    //     if(playerAttack) EventManager.triggerEvent("Player Kill");
+    //   }
+    // }
 
     StartCoroutine(vulnerability());
     StartCoroutine(onCooldown());
