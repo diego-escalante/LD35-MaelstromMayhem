@@ -11,6 +11,10 @@ public class EventManager : MonoBehaviour {
 
   //===================================================================================================================
 
+  private void Awake() {DontDestroyOnLoad(transform.gameObject);}
+
+  //===================================================================================================================
+
   //Property
   public static EventManager instance {
     get {

@@ -48,7 +48,7 @@ public class ExistenceAI : ExistenceBase {
   //===================================================================================================================
 
   public override void die() {
-    base.die();
+    sound.playDamage();
     normalPS.GetComponent<ParticleSystem>().Play();
     normalPS.transform.parent = null;
     EventManager.triggerEvent("Elemental Death");
