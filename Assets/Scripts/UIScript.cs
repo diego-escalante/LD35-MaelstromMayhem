@@ -13,6 +13,9 @@ public class UIScript : MonoBehaviour {
   private GameObject againButton;
   private int score = 0;
 
+  public Sprite waterIcon;
+  public Sprite fireIcon;
+  public Sprite plantIcon;
 
   public GameObject highPrefab;
   private HighTracker hs;
@@ -145,5 +148,14 @@ public class UIScript : MonoBehaviour {
   private string zerorize(int score) {
     if(score < 10) return "0000000" + score;
     else return "000000" + score;
+  }
+
+  //===================================================================================================================
+
+  public void swapIcon(int i) {
+    if(i == 0) cooldown.sprite = waterIcon;
+    else if(i == 1) cooldown.sprite = fireIcon;
+    else cooldown.sprite = plantIcon;
+    UpdateCooldown(0);
   }
 }

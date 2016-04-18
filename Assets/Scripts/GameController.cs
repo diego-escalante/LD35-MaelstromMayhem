@@ -94,6 +94,7 @@ public class GameController : MonoBehaviour {
     else if(i == 1) g = (GameObject)Instantiate(plantPlayer, spawnPoint, Quaternion.identity);
     else g = (GameObject)Instantiate(firePlayer, spawnPoint, Quaternion.identity);
     g.GetComponent<ExistenceBase>().spawn();
+    GameObject.FindWithTag("UI").GetComponent<UIScript>().swapIcon(i);
   }
 
 }
