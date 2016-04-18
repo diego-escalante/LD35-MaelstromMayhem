@@ -23,7 +23,6 @@ public class GameController : MonoBehaviour {
   //===================================================================================================================
 
   private void Start() {
-    print("yo");
     startGame();
     EventManager.triggerEvent("One Time Thing Everything Is Getting Messy");
   }
