@@ -33,7 +33,7 @@ public class FireAttack : BaseAttack {
 
     yield return new WaitForSeconds(delay);
 
-    sound.playAttack();
+    sound.playAttack(playerAttack);
     anim.doAttack();
     
     float timeLeft = stunDuration - delay;

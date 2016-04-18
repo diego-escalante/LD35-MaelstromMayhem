@@ -19,7 +19,7 @@ public class WaterAttack : BaseAttack {
     if(!attackReady) return;
     move.StunTime = stunDuration;
 
-    sound.playAttack();
+    sound.playAttack(playerAttack);
     anim.doAttack();
 
     GameObject b = (GameObject)Instantiate(bullet, transform.position, Quaternion.identity);
