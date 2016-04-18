@@ -57,7 +57,7 @@ public class ExistenceBase : MonoBehaviour {
   //===================================================================================================================
 
   public IEnumerator shapeshift() {
-    yield return new WaitForSeconds(Random.Range(0f,10f));
+    yield return new WaitForSeconds(Random.Range(5f,10f));
 
     int newForm;
     do {
