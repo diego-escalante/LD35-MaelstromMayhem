@@ -46,14 +46,12 @@ public class MusicController : MonoBehaviour {
   //===================================================================================================================
 
   private void startGame() {
-    print("start");
     StartCoroutine(fadeIn(everythingElse));
   }
 
   //===================================================================================================================
 
   private void playerDeath() {
-    print("death");
     StartCoroutine(fadeIn(everythingElse, true));
   }
 }
