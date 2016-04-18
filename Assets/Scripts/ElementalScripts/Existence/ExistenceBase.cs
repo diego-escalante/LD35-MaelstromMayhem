@@ -44,7 +44,7 @@ public class ExistenceBase : MonoBehaviour {
   //===================================================================================================================
 
   protected virtual IEnumerator spawnSequence(){
-    Debug.LogError("This shouldn't happen.");
+    Debug.LogError("This shouldn't happen. Check the children.");
     yield return null;
   }
 
@@ -70,10 +70,12 @@ public class ExistenceBase : MonoBehaviour {
     SPS.startColor = cs[newForm];
     SPS.Play();
 
-    yield return new WaitForSeconds(2.55f);
+    yield return new WaitForSeconds(2.5f);
 
     GameObject newElemental = createElemental(newForm, transform.position);
-    newElemental.GetComponent<ExistenceBase>().emitShapeParticles();
+    spawnPS.transform.parent = newElemental.transform;
+    Destroy(spawnPS, 5);
+    // newElemental.GetComponent<ExistenceBase>().emitShapeParticles();
     Destroy(gameObject);
   }
 
@@ -87,7 +89,7 @@ public class ExistenceBase : MonoBehaviour {
 
   //===================================================================================================================
 
-  public void emitShapeParticles(){
-    normalPS.GetComponent<ParticleSystem>().Play();
-  }
+  // public void emitShapeParticles(){
+  //   normalPS.GetComponent<ParticleSystem>().Play();
+  // }
 }

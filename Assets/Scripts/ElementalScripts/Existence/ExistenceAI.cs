@@ -16,9 +16,23 @@ public class ExistenceAI : ExistenceBase {
   //===================================================================================================================
 
   protected override IEnumerator spawnSequence(){
-    // yield return new WaitForSeconds(5f);
-    yield return null;
-    normalPS.GetComponent<ParticleSystem>().Play();
+    GetComponent<SpriteRenderer>().enabled = false;
+    GetComponent<Collider2D>().enabled = false;
+    GetComponent<Animator>().enabled = false;
+    GetComponent<AnimationController>().enabled = false;
+    GetComponent<BaseAI>().enabled = false;
+    GetComponent<Movement>().enabled = false;
+    spawnPS.GetComponent<ParticleSystem>().Play();
+    
+    yield return new WaitForSeconds(2.75f);
+    
+    // normalPS.GetComponent<ParticleSystem>().Play();
+    GetComponent<SpriteRenderer>().enabled = true;
+    GetComponent<Collider2D>().enabled = true;
+    GetComponent<Animator>().enabled = true;
+    GetComponent<AnimationController>().enabled = true;
+    GetComponent<BaseAI>().enabled = true;
+    GetComponent<Movement>().enabled = true;
   }
 
   //===================================================================================================================
@@ -28,7 +42,7 @@ public class ExistenceAI : ExistenceBase {
     GetComponent<Movement>().enabled = false;
     GetComponent<Animator>().enabled = false;
     StopCoroutine(asyncShapeshift);
-    Invoke("die", Random.Range(1f, 3f));
+    Invoke("die", Random.Range(1f, 1.5f));
   }
 
   //===================================================================================================================

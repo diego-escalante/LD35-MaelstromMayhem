@@ -28,7 +28,7 @@ public class UIScript : MonoBehaviour {
     fader = transform.Find("Fader").GetComponent<Image>();
     cooldown = transform.Find("Cooldown").GetComponent<Image>();
     scoreText = transform.Find("Score").GetComponent<Text>();
-    scoreText.text = "Best: " + hs.HighScore + "\nScore: 0";
+    scoreText.text = "Best: " + zerorize(hs.HighScore) + "\nScore: " + zerorize(0);
     finalScoreText = transform.Find("Final Score").GetComponent<Text>();
 
     backButton = transform.Find("Back Button").gameObject;
@@ -78,7 +78,7 @@ public class UIScript : MonoBehaviour {
       newBest = true;
       hs.HighScore = score;
     }
-    scoreText.text = "Best: " + hs.HighScore + "\nScore: " + score;
+    scoreText.text = "Best: " + zerorize(hs.HighScore) + "\nScore: " + zerorize(score);
   }
 
   //===================================================================================================================
@@ -88,11 +88,10 @@ public class UIScript : MonoBehaviour {
     cooldown.enabled = false;
     scoreText.enabled = false;
 
-    if(newBest) finalScoreText.text = "<color=yellow>New record!\nFinal Score: " + score + "</color>\nClick to Restart";
-    else finalScoreText.text = "Final Score: " + score + "\nClick to Restart";
+    if(newBest) finalScoreText.text = "<color=yellow>New record!\nFinal Score: " + zerorize(score) + "</color>\nClick to Restart";
+    else finalScoreText.text = "Final Score: " + zerorize(score) + "\nClick to Restart";
     newBest = false;
-    scoreText.text = "Best: " + hs.HighScore + "\nScore: 0";
-    score = 0;
+    scoreText.text = "Best: " + zerorize(hs.HighScore) + "\nScore: " + zerorize(0);
     backButton.SetActive(true);
     againButton.SetActive(true);
   }
@@ -123,6 +122,7 @@ public class UIScript : MonoBehaviour {
     StartCoroutine(fadeIn());
     cooldown.enabled = true;
     scoreText.enabled = true;
+    score = 0;
 
     finalScoreText.text = "";
     backButton.SetActive(false);
@@ -138,5 +138,12 @@ public class UIScript : MonoBehaviour {
     StartCoroutine(fadeIn(true));
     yield return new WaitForSeconds(0.25f);
     SceneManager.LoadScene("intro");
+  }
+
+  //===================================================================================================================
+
+  private string zerorize(int score) {
+    if(score < 10) return "0000000" + score;
+    else return "000000" + score;
   }
 }
