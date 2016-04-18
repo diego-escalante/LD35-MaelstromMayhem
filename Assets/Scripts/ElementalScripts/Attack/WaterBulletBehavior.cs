@@ -29,6 +29,7 @@ public class WaterBulletBehavior : MonoBehaviour {
     Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, bulletRadius);
     foreach(Collider2D candidate in candidates) {
       if(candidate.gameObject.tag == weakTag) {
+        if(playerOwned && candidate.GetComponent<ExistencePlayer>()) continue;
         candidate.GetComponent<ExistenceBase>().die();
         if(playerOwned) EventManager.triggerEvent("Player Kill");
       }
