@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour {
   private int initialAICount = 5;
   private float spawnRate = 2f;
 
-  private Vector3 spawnPoint = Vector3.zero;
+  private Vector3 spawnPoint = new Vector3(0.75f, 0.5f, 0);
 
   public Vector3 SpawnPoint {set {spawnPoint=value;}}
 
@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour {
 
   private void Start() {
     startGame();
+    EventManager.triggerEvent("One Time Thing Everything Is Getting Messy");
   }
 
   //===================================================================================================================
