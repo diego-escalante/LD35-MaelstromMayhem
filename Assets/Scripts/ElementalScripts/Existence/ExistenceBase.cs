@@ -72,7 +72,10 @@ public class ExistenceBase : MonoBehaviour {
 
     yield return new WaitForSeconds(2.5f);
 
-    if(GetComponent<PlayerAction>()) GameObject.FindWithTag("UI").GetComponent<UIScript>().swapIcon(newForm);
+    if(GetComponent<PlayerAction>()) {
+      GameObject g = GameObject.FindWithTag("UI");
+      if(g != null) g.GetComponent<UIScript>().swapIcon(newForm);
+    }
 
     GameObject newElemental = createElemental(newForm, transform.position);
     spawnPS.transform.parent = newElemental.transform;

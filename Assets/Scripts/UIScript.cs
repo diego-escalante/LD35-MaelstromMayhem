@@ -47,14 +47,14 @@ public class UIScript : MonoBehaviour {
 
   private void OnEnable() {
     EventManager.startListening("Player Kill", scoreIncrease);
-    EventManager.startListening("Player Death", pause);
+    EventManager.startListening("Player Death", delayPause);
   }
 
   //===================================================================================================================
 
   private void OnDisable() {
     EventManager.stopListening("Player Kill", scoreIncrease);
-    EventManager.stopListening("Player Death", pause);
+    EventManager.stopListening("Player Death", delayPause);
   }
 
   //===================================================================================================================
@@ -82,6 +82,12 @@ public class UIScript : MonoBehaviour {
       hs.HighScore = score;
     }
     scoreText.text = "Best: " + zerorize(hs.HighScore) + "\nScore: " + zerorize(score);
+  }
+
+  //===================================================================================================================
+
+  private void delayPause() {
+    Invoke("pause", 1f);
   }
 
   //===================================================================================================================
