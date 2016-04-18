@@ -19,6 +19,8 @@ public class ExistencePlayer : ExistenceBase {
 
   protected override IEnumerator spawnSequence(){
 
+    // sound.playCharge();
+
     GetComponent<SpriteRenderer>().enabled = false;
     GetComponent<Collider2D>().enabled = false;
     GetComponent<Animator>().enabled = false;

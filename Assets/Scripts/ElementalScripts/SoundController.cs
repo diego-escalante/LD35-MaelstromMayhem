@@ -5,6 +5,7 @@ public class SoundController : MonoBehaviour {
 
   public AudioClip atkSound;
   public AudioClip damageSound;
+  public AudioClip chargeSound;
 
   //===================================================================================================================
 
@@ -16,6 +17,12 @@ public class SoundController : MonoBehaviour {
 
   public void playDamage(){
     playSound(damageSound);
+  }
+
+  //===================================================================================================================
+
+  public void playCharge(){
+    playSound(chargeSound);
   }
 
   //===================================================================================================================

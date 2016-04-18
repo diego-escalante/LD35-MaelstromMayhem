@@ -11,7 +11,7 @@ public class ExistenceBase : MonoBehaviour {
   public GameObject fireElemental;  
   public GameObject plantElemental; 
 
-  private SoundController sound;
+  protected SoundController sound;
 
   protected IEnumerator asyncShapeshift;
 
