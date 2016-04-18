@@ -15,10 +15,20 @@ public class PlantSpinBehavior : MonoBehaviour {
   // public Vector2 Direction {set {direction = value;}}
   public bool PlayerOwned {set {playerOwned = value;}}
 
+  private Animator anim;
+  public Vector2 direction = Vector2.zero;
+
+  //===================================================================================================================
+
+  private void Awake() {
+    anim = GetComponent<Animator>();
+  }
+
   //===================================================================================================================
 
   private void Start() {
     Destroy(gameObject, lifetime);
+    getDirection();
   }
 
   //===================================================================================================================
@@ -33,6 +43,51 @@ public class PlantSpinBehavior : MonoBehaviour {
         if(playerOwned) EventManager.triggerEvent("Player Kill");
       }
     }
+  }
+
+  //===================================================================================================================
+
+  private void getDirection() {
+    // Vector2 vDir = -(transform.position - move.Target).normalized;
+
+    // if(vDir == Vector2.zero) {
+    //   isMoving = false;
+    //   return direction; 
+    // }
+    float angle = Vec2Deg(direction);
+    angle = angleToDir(angle);
+    
+    switch((int)angle) {
+      case 0:
+        anim.SetTrigger("Up");
+        break;
+      case 1:
+        anim.SetTrigger("Right");
+        break;
+      case 2:
+        anim.SetTrigger("Down");
+        break;
+      case 3:
+        anim.SetTrigger("Left");
+        break;
+    };
+  }
+
+  //===================================================================================================================
+
+  private int angleToDir(float angle) {
+    int[] roundedAngles = {1, 0, 3, 2, 1};
+    int i = Mathf.RoundToInt(angle / 90);
+    return roundedAngles[i];
+  }
+
+  //===================================================================================================================
+
+  private float Vec2Deg(Vector2 v, bool isRelative=false){
+    float angle = Mathf.Atan2 (v.y, v.x) * Mathf.Rad2Deg;
+    if (angle < 0) angle += 360;
+    if(isRelative && v.x > 0) angle = 180 - angle;
+    return angle;
   }
 
 }
