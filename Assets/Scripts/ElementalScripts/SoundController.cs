@@ -8,6 +8,7 @@ public class SoundController : MonoBehaviour {
   public AudioClip chargeSound;
   public AudioClip deathSound;
   public AudioClip spawnSound;
+  public AudioClip shiftSound;
 
   private AudioSource aSource;
 
@@ -15,6 +16,12 @@ public class SoundController : MonoBehaviour {
 
   private void Start() {
     aSource = Camera.main.GetComponent<AudioSource>();
+  }
+
+  //===================================================================================================================
+
+  public void playShift(bool global=false) {
+    playSound(shiftSound, global);
   }
 
   //===================================================================================================================

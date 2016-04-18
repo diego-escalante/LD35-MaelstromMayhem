@@ -69,6 +69,7 @@ public class ExistenceBase : MonoBehaviour {
     Color[] cs = {new Color(42/255f,161/255f,180/255f), new Color(255/255f,100/255f,0f), new Color(126/225f, 255/255f, 22/225f)};
     SPS.startColor = cs[newForm];
     SPS.Play();
+    if(GetComponent<PlayerAction>()) sound.playShift(true);
 
     yield return new WaitForSeconds(2.5f);
 
