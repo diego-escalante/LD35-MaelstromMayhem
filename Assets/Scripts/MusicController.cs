@@ -24,6 +24,7 @@ public class MusicController : MonoBehaviour {
   //===================================================================================================================
 
   private void Update() {
+    if(Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
     everythingElse.pitch = pitch;
     onlyDrums.pitch = pitch;
     if(!playing) return;
