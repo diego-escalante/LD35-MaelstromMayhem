@@ -10,7 +10,10 @@ public class MusicController : MonoBehaviour {
 
   //===================================================================================================================
 
-  private void Awake() { DontDestroyOnLoad(transform.gameObject); }
+  private void Awake() { 
+    DontDestroyOnLoad(transform.gameObject); 
+    if(GameObject.FindGameObjectsWithTag("Music Controller").Length > 1) Destroy(gameObject);
+  }
 
   //===================================================================================================================
 
