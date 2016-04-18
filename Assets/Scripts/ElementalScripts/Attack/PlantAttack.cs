@@ -30,7 +30,7 @@ public class PlantAttack : BaseAttack {
     move.StunTime = stunDuration;
 
     GameObject b = (GameObject)Instantiate(spin, transform.position, Quaternion.identity);
-    // b.GetComponent<PlantSpinBehavior>().Direction = -(transform.position - move.Target).normalized;
+    b.GetComponent<PlantSpinBehavior>().direction = -(transform.position - move.Target).normalized;
     if(GetComponent<ExistencePlayer>()) b.GetComponent<PlantSpinBehavior>().PlayerOwned = true;
 
     // Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, plantAtkRadius);
