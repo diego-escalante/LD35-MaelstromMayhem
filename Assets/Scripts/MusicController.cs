@@ -5,6 +5,8 @@ public class MusicController : MonoBehaviour {
 
   public AudioSource everythingElse;
   public AudioSource onlyDrums;
+  private bool playing = false;
+  private float pitch = 1;
 
   //===================================================================================================================
 
@@ -14,6 +16,15 @@ public class MusicController : MonoBehaviour {
 
   private void Start() {
     StartCoroutine(fadeIn(onlyDrums, false, 2));
+  }
+
+  //===================================================================================================================
+
+  private void Update() {
+    everythingElse.pitch = pitch;
+    onlyDrums.pitch = pitch;
+    if(!playing) return;
+    pitch += Time.deltaTime / 480;
   }
 
   //===================================================================================================================
@@ -45,13 +56,29 @@ public class MusicController : MonoBehaviour {
 
   //===================================================================================================================
 
+  private IEnumerator pitchReset() {
+    float originalPitch = pitch;
+    float timeLeft = 0.5f;
+    while(timeLeft > 0) {
+      timeLeft -= Time.deltaTime;
+      pitch = 1 + (originalPitch - 1) * (timeLeft/0.5f);
+      yield return null;
+    }
+    pitch = 1;
+  }
+
+  //===================================================================================================================
+
   private void startGame() {
+    playing = true;
     StartCoroutine(fadeIn(everythingElse));
   }
 
   //===================================================================================================================
 
   private void playerDeath() {
+    playing = false;
+    StartCoroutine(pitchReset());
     StartCoroutine(fadeIn(everythingElse, true));
   }
 }
