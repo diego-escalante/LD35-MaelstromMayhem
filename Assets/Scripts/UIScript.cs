@@ -13,6 +13,9 @@ public class UIScript : MonoBehaviour {
   private GameObject againButton;
   private int score = 0;
 
+  public Sprite waterIcon;
+  public Sprite fireIcon;
+  public Sprite plantIcon;
 
   public GameObject highPrefab;
   private HighTracker hs;
@@ -44,14 +47,14 @@ public class UIScript : MonoBehaviour {
 
   private void OnEnable() {
     EventManager.startListening("Player Kill", scoreIncrease);
-    EventManager.startListening("Player Death", pause);
+    EventManager.startListening("Player Death", delayPause);
   }
 
   //===================================================================================================================
 
   private void OnDisable() {
     EventManager.stopListening("Player Kill", scoreIncrease);
-    EventManager.stopListening("Player Death", pause);
+    EventManager.stopListening("Player Death", delayPause);
   }
 
   //===================================================================================================================
@@ -79,6 +82,12 @@ public class UIScript : MonoBehaviour {
       hs.HighScore = score;
     }
     scoreText.text = "Best: " + zerorize(hs.HighScore) + "\nScore: " + zerorize(score);
+  }
+
+  //===================================================================================================================
+
+  private void delayPause() {
+    Invoke("pause", 1f);
   }
 
   //===================================================================================================================
@@ -145,5 +154,14 @@ public class UIScript : MonoBehaviour {
   private string zerorize(int score) {
     if(score < 10) return "0000000" + score;
     else return "000000" + score;
+  }
+
+  //===================================================================================================================
+
+  public void swapIcon(int i) {
+    if(i == 0) cooldown.sprite = waterIcon;
+    else if(i == 1) cooldown.sprite = fireIcon;
+    else cooldown.sprite = plantIcon;
+    UpdateCooldown(0);
   }
 }

@@ -11,6 +11,8 @@ public class CamShake : MonoBehaviour {
   private void OnEnable() {
     EventManager.startListening("Player Death", playerDeath);
     EventManager.startListening("Player Kill", playerKill);
+    EventManager.startListening("Start Game", startGame);
+    EventManager.startListening("One Time Thing Everything Is Getting Messy", startGame);
   }
 
   //===================================================================================================================
@@ -18,6 +20,8 @@ public class CamShake : MonoBehaviour {
   private void OnDisable() {
     EventManager.stopListening("Player Death", playerDeath);
     EventManager.stopListening("Player Kill", playerKill);
+    EventManager.stopListening("Start Game", startGame);
+    EventManager.stopListening("One Time Thing Everything Is Getting Messy", startGame);
   }
 
   //===================================================================================================================
@@ -31,6 +35,12 @@ public class CamShake : MonoBehaviour {
     private void playerKill() {
     if(doneShaking) StartCoroutine(shake(15, 1f, 0.01f, true, Vector2.zero));
   }
+
+  //===================================================================================================================
+
+    private void startGame() {
+      if(doneShaking) StartCoroutine(shake(150, 0.25f, 0.02f, true, Vector2.zero));
+    }
 
   //===================================================================================================================
 

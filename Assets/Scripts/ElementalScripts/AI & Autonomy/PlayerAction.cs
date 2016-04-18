@@ -10,10 +10,13 @@ public class PlayerAction : MonoBehaviour {
   //===================================================================================================================
 
   private void Start() {
-    Camera.main.transform.parent.GetComponent<CamMovement>().Target = transform;
+    CamMovement m = Camera.main.transform.parent.GetComponent<CamMovement>();
+    if(m) m.Target = transform;
     move = GetComponent<Movement>();
     attack = GetComponent<BaseAttack>();
-    UI = GameObject.FindWithTag("UI").GetComponent<UIScript>();
+    GameObject g = GameObject.FindWithTag("UI");
+    if(g != null)
+      UI = g.GetComponent<UIScript>();
   }
 
   //===================================================================================================================
@@ -35,7 +38,7 @@ public class PlayerAction : MonoBehaviour {
   //===================================================================================================================
 
   private void Update() {
-    UI.UpdateCooldown(attack.cooldownLeft());
+    if(UI) UI.UpdateCooldown(attack.cooldownLeft());
   }
 
   //===================================================================================================================

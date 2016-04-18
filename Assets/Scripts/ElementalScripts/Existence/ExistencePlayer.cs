@@ -18,8 +18,8 @@ public class ExistencePlayer : ExistenceBase {
   //===================================================================================================================
 
   protected override IEnumerator spawnSequence(){
-
-    // sound.playCharge();
+    yield return null;
+    sound.playSpawn(true);
 
     GetComponent<SpriteRenderer>().enabled = false;
     GetComponent<Collider2D>().enabled = false;
@@ -44,14 +44,13 @@ public class ExistencePlayer : ExistenceBase {
   //===================================================================================================================
 
   public override void die() {
-    sound.playDamage(true);
+    sound.playDeath(true);
     GameObject.FindWithTag("GameController").GetComponent<GameController>().SpawnPoint = transform.position;
     epicPS.GetComponent<ParticleSystem>().Play();
     epicPS.transform.parent = null;
     
     Destroy(epicPS, 10);
     Destroy(gameObject);
-
     EventManager.triggerEvent("Player Death");
   }
 }

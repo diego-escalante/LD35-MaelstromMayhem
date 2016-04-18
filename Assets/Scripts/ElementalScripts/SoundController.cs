@@ -6,6 +6,8 @@ public class SoundController : MonoBehaviour {
   public AudioClip atkSound;
   public AudioClip damageSound;
   public AudioClip chargeSound;
+  public AudioClip deathSound;
+  public AudioClip spawnSound;
 
   private AudioSource aSource;
 
@@ -31,6 +33,18 @@ public class SoundController : MonoBehaviour {
 
   public void playCharge(bool global=false){
     playSound(chargeSound, global);
+  }
+
+  //===================================================================================================================
+
+  public void playDeath(bool global=false){
+    playSound(deathSound, global);
+  }
+
+  //===================================================================================================================
+
+  public void playSpawn(bool global=false){
+    playSound(spawnSound, global);
   }
 
   //===================================================================================================================
