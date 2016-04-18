@@ -13,12 +13,22 @@ public class UIScript : MonoBehaviour {
   private GameObject againButton;
   private int score = 0;
 
+
+  public GameObject highPrefab;
+  private HighTracker hs;
+  private bool newBest = false;
+
   //===================================================================================================================
 
   private void Start() {
+    GameObject hsObj = GameObject.Find("High Score(Clone)");
+    if(!hsObj) hsObj = (GameObject)Instantiate(highPrefab);
+    hs = hsObj.GetComponent<HighTracker>();
+
     fader = transform.Find("Fader").GetComponent<Image>();
     cooldown = transform.Find("Cooldown").GetComponent<Image>();
     scoreText = transform.Find("Score").GetComponent<Text>();
+    scoreText.text = "Best: " + hs.HighScore + "\nScore: 0";
     finalScoreText = transform.Find("Final Score").GetComponent<Text>();
 
     backButton = transform.Find("Back Button").gameObject;
@@ -64,7 +74,11 @@ public class UIScript : MonoBehaviour {
 
   private void scoreIncrease() {
     score++;
-    scoreText.text = "SCORE\n" + score;
+    if(score > hs.HighScore) {
+      newBest = true;
+      hs.HighScore = score;
+    }
+    scoreText.text = "Best: " + hs.HighScore + "\nScore: " + score;
   }
 
   //===================================================================================================================
@@ -74,8 +88,10 @@ public class UIScript : MonoBehaviour {
     cooldown.enabled = false;
     scoreText.enabled = false;
 
-    finalScoreText.text = "Final Score: " + score + "\nClick to Restart";
-    scoreText.text = "SCORE\n0";
+    if(newBest) finalScoreText.text = "<color=yellow>New record!\nFinal Score: " + score + "</color>\nClick to Restart";
+    else finalScoreText.text = "Final Score: " + score + "\nClick to Restart";
+    newBest = false;
+    scoreText.text = "Best: " + hs.HighScore + "\nScore: 0";
     score = 0;
     backButton.SetActive(true);
     againButton.SetActive(true);
