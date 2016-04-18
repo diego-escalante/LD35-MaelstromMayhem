@@ -3,20 +3,14 @@ using System.Collections;
 
 public class WaterAttack : BaseAttack {
 
-  private GameObject bullet;
+  public GameObject bullet;
 
   //===================================================================================================================
 
   protected override void Awake() {
     base.Awake();
-    stunDuration = 0.25f;
+    stunDuration = 0.1f;
     attackCooldown = 0.25f;
-  }
-
-  //===================================================================================================================
-
-  protected void Start() {
-    bullet = Resources.Load("Water Bullet") as GameObject;
   }
 
   //===================================================================================================================
@@ -30,6 +24,7 @@ public class WaterAttack : BaseAttack {
 
     GameObject b = (GameObject)Instantiate(bullet, transform.position, Quaternion.identity);
     b.GetComponent<WaterBulletBehavior>().Direction = -(transform.position - move.Target).normalized;
+    if(GetComponent<ExistencePlayer>()) b.GetComponent<WaterBulletBehavior>().PlayerOwned = true;
 
     StartCoroutine(onCooldown());
   }

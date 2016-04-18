@@ -7,11 +7,16 @@ public class ExistenceBase : MonoBehaviour {
   protected GameObject normalPS;
   protected GameObject spawnPS;
   
-  protected GameObject waterElemental; 
-  protected GameObject fireElemental;  
-  protected GameObject plantElemental; 
+  public GameObject waterElemental; 
+  public GameObject fireElemental;  
+  public GameObject plantElemental; 
 
-  private SoundController sound;
+  protected SoundController sound;
+
+  protected IEnumerator asyncShapeshift;
+
+  protected bool invulnerable = false;
+  public bool Invulnerable {get;set;}
 
   //===================================================================================================================
 
@@ -25,7 +30,8 @@ public class ExistenceBase : MonoBehaviour {
     spawnPS = transform.Find("Spawn PS").gameObject;
     sound = GetComponent<SoundController>();
 
-    StartCoroutine(shapeshift());
+    asyncShapeshift = shapeshift();
+    StartCoroutine(asyncShapeshift);
   }
 
   //===================================================================================================================
@@ -38,7 +44,7 @@ public class ExistenceBase : MonoBehaviour {
   //===================================================================================================================
 
   protected virtual IEnumerator spawnSequence(){
-    Debug.LogError("This shouldn't happen.");
+    Debug.LogError("This shouldn't happen. Check the children.");
     yield return null;
   }
 
@@ -51,7 +57,7 @@ public class ExistenceBase : MonoBehaviour {
   //===================================================================================================================
 
   public IEnumerator shapeshift() {
-    yield return new WaitForSeconds(Random.Range(0f,10f));
+    yield return new WaitForSeconds(Random.Range(5f,10f));
 
     int newForm;
     do {
@@ -64,10 +70,12 @@ public class ExistenceBase : MonoBehaviour {
     SPS.startColor = cs[newForm];
     SPS.Play();
 
-    yield return new WaitForSeconds(5f);
+    yield return new WaitForSeconds(2.5f);
 
     GameObject newElemental = createElemental(newForm, transform.position);
-    newElemental.GetComponent<ExistenceBase>().emitShapeParticles();
+    spawnPS.transform.parent = newElemental.transform;
+    Destroy(spawnPS, 5);
+    // newElemental.GetComponent<ExistenceBase>().emitShapeParticles();
     Destroy(gameObject);
   }
 
@@ -81,7 +89,7 @@ public class ExistenceBase : MonoBehaviour {
 
   //===================================================================================================================
 
-  public void emitShapeParticles(){
-    normalPS.GetComponent<ParticleSystem>().Play();
-  }
+  // public void emitShapeParticles(){
+  //   normalPS.GetComponent<ParticleSystem>().Play();
+  // }
 }

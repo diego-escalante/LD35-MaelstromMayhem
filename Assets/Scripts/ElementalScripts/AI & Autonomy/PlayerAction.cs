@@ -10,7 +10,7 @@ public class PlayerAction : MonoBehaviour {
   //===================================================================================================================
 
   private void Start() {
-    Camera.main.GetComponent<CamMovement>().Target = transform;
+    Camera.main.transform.parent.GetComponent<CamMovement>().Target = transform;
     move = GetComponent<Movement>();
     attack = GetComponent<BaseAttack>();
     UI = GameObject.FindWithTag("UI").GetComponent<UIScript>();

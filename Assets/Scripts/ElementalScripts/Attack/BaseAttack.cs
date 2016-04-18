@@ -12,12 +12,16 @@ public class BaseAttack : MonoBehaviour {
   private float timeLeft = 0;
   protected float attackCooldown = 0;
 
+  protected bool playerAttack = false;
+
   //===================================================================================================================
 
   protected virtual void Awake() {
     move = GetComponent<Movement>();
     sound = GetComponent<SoundController>();
     anim = GetComponent<AnimationController>();
+
+    if(GetComponent<ExistencePlayer>()) playerAttack = true;
   }
 
   //===================================================================================================================

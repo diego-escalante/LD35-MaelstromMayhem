@@ -13,12 +13,22 @@ public class UIScript : MonoBehaviour {
   private GameObject againButton;
   private int score = 0;
 
+
+  public GameObject highPrefab;
+  private HighTracker hs;
+  private bool newBest = false;
+
   //===================================================================================================================
 
   private void Start() {
+    GameObject hsObj = GameObject.Find("High Score(Clone)");
+    if(!hsObj) hsObj = (GameObject)Instantiate(highPrefab);
+    hs = hsObj.GetComponent<HighTracker>();
+
     fader = transform.Find("Fader").GetComponent<Image>();
     cooldown = transform.Find("Cooldown").GetComponent<Image>();
     scoreText = transform.Find("Score").GetComponent<Text>();
+    scoreText.text = "Best: " + zerorize(hs.HighScore) + "\nScore: " + zerorize(0);
     finalScoreText = transform.Find("Final Score").GetComponent<Text>();
 
     backButton = transform.Find("Back Button").gameObject;
@@ -33,14 +43,14 @@ public class UIScript : MonoBehaviour {
   //===================================================================================================================
 
   private void OnEnable() {
-    EventManager.startListening("Elemental Death", scoreIncrease);
+    EventManager.startListening("Player Kill", scoreIncrease);
     EventManager.startListening("Player Death", pause);
   }
 
   //===================================================================================================================
 
   private void OnDisable() {
-    EventManager.stopListening("Elemental Death", scoreIncrease);
+    EventManager.stopListening("Player Kill", scoreIncrease);
     EventManager.stopListening("Player Death", pause);
   }
 
@@ -64,7 +74,11 @@ public class UIScript : MonoBehaviour {
 
   private void scoreIncrease() {
     score++;
-    scoreText.text = "SCORE\n" + score;
+    if(score > hs.HighScore) {
+      newBest = true;
+      hs.HighScore = score;
+    }
+    scoreText.text = "Best: " + zerorize(hs.HighScore) + "\nScore: " + zerorize(score);
   }
 
   //===================================================================================================================
@@ -74,8 +88,10 @@ public class UIScript : MonoBehaviour {
     cooldown.enabled = false;
     scoreText.enabled = false;
 
-    finalScoreText.text = "Final Score: " + score;
-    score = 0;
+    if(newBest) finalScoreText.text = "<color=yellow>New record!\nFinal Score: " + zerorize(score) + "</color>\nClick to Restart";
+    else finalScoreText.text = "Final Score: " + zerorize(score) + "\nClick to Restart";
+    newBest = false;
+    scoreText.text = "Best: " + zerorize(hs.HighScore) + "\nScore: " + zerorize(0);
     backButton.SetActive(true);
     againButton.SetActive(true);
   }
@@ -106,6 +122,7 @@ public class UIScript : MonoBehaviour {
     StartCoroutine(fadeIn());
     cooldown.enabled = true;
     scoreText.enabled = true;
+    score = 0;
 
     finalScoreText.text = "";
     backButton.SetActive(false);
@@ -121,5 +138,12 @@ public class UIScript : MonoBehaviour {
     StartCoroutine(fadeIn(true));
     yield return new WaitForSeconds(0.25f);
     SceneManager.LoadScene("intro");
+  }
+
+  //===================================================================================================================
+
+  private string zerorize(int score) {
+    if(score < 10) return "0000000" + score;
+    else return "000000" + score;
   }
 }

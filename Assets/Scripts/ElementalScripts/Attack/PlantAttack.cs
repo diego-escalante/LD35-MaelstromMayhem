@@ -6,12 +6,16 @@ public class PlantAttack : BaseAttack {
   private float plantAtkRadius = 3f;
   private string weakTag = "Water Elemental";
 
+  private ExistenceBase ex;
+
   //===================================================================================================================
 
   protected override void Awake() {
     base.Awake();
     stunDuration = 0.5f;
-    attackCooldown = 0.5f;
+    attackCooldown = 1f;
+
+    ex = GetComponent<ExistenceBase>();
   }
 
   //===================================================================================================================
@@ -27,10 +31,20 @@ public class PlantAttack : BaseAttack {
     foreach(Collider2D candidate in candidates) {
       if(candidate.gameObject.tag == weakTag) {
         candidate.GetComponent<ExistenceBase>().die();
+        if(playerAttack) EventManager.triggerEvent("Player Kill");
       }
     }
 
+    StartCoroutine(vulnerability());
     StartCoroutine(onCooldown());
+  }
+
+  //===================================================================================================================
+
+  private IEnumerator vulnerability() {
+    ex.Invulnerable = true;
+    yield return new WaitForSeconds(stunDuration);
+    ex.Invulnerable = false;
   }
 }
 

@@ -4,23 +4,40 @@ using System.Collections;
 public class ExistencePlayer : ExistenceBase {
 
   private GameObject epicPS;
+  private GameObject epicSpawnPS;
 
   //===================================================================================================================
 
   protected override void Awake() {
     
     epicPS = transform.Find("Epic PS").gameObject;
-    waterElemental = Resources.Load("Player/Water Player") as GameObject;
-    fireElemental = Resources.Load("Player/Fire Player") as GameObject;
-    plantElemental = Resources.Load("Player/Plant Player") as GameObject;
+    epicSpawnPS = transform.Find("Spawn Epic PS").gameObject;
     base.Awake();
   }
 
   //===================================================================================================================
 
   protected override IEnumerator spawnSequence(){
-    yield return null;
-    epicPS.GetComponent<ParticleSystem>().Play();
+
+    // sound.playCharge();
+
+    GetComponent<SpriteRenderer>().enabled = false;
+    GetComponent<Collider2D>().enabled = false;
+    GetComponent<Animator>().enabled = false;
+    GetComponent<AnimationController>().enabled = false;
+    GetComponent<PlayerAction>().enabled = false;
+    GetComponent<Movement>().enabled = false;
+    epicSpawnPS.GetComponent<ParticleSystem>().Play();
+    
+    yield return new WaitForSeconds(3f);
+    
+    GetComponent<SpriteRenderer>().enabled = true;
+    GetComponent<Collider2D>().enabled = true;
+    GetComponent<Animator>().enabled = true;
+    GetComponent<AnimationController>().enabled = true;
+    GetComponent<PlayerAction>().enabled = true;
+    GetComponent<Movement>().enabled = true;
+
     EventManager.triggerEvent("Player Spawned");
   }
 
