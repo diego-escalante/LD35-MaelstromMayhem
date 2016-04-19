@@ -19,6 +19,10 @@ public class WaterBulletBehavior : MonoBehaviour {
 
   private void Start() {
     Destroy(gameObject, lifetime);
+    if(playerOwned) {
+      bulletRadius = 0.5f;
+      transform.localScale = new Vector3(0.75f, 0.75f, 0);
+    }
   }
 
   //===================================================================================================================

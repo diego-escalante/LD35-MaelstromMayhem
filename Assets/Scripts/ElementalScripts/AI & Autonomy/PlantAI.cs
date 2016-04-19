@@ -9,7 +9,7 @@ public class PlantAI : BaseAI {
   private void Awake() {
     weakTag = "Water Elemental";
     strongTag = "Fire Elemental";
-    attackRange = 1f;
+    attackRange = 2f;
   }
 }
 

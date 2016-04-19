@@ -47,7 +47,7 @@ public class FireAttack : BaseAttack {
       timeLeft -= Time.deltaTime;
       transform.Translate(direction * dashSpeed * Time.deltaTime);
       if(panicBool) move.Target = transform.position;
-      Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, atkRadius);
+      Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, playerAttack ? atkRadius*1.5f : atkRadius);
       foreach(Collider2D candidate in candidates) {
         if(candidate.gameObject.tag == weakTag) {
           ExistenceBase ex = candidate.GetComponent<ExistenceBase>();
