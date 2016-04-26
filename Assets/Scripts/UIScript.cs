@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 public class UIScript : MonoBehaviour {
 
@@ -11,6 +12,10 @@ public class UIScript : MonoBehaviour {
   private Image cooldown;
   private GameObject backButton;
   private GameObject againButton;
+  private GameObject submitButton;
+  private GameObject noThanksButton;
+  private GameObject inputField;
+  private Text champName;
   private int score = 0;
 
   public Sprite waterIcon;
@@ -21,12 +26,15 @@ public class UIScript : MonoBehaviour {
   private HighTracker hs;
   private bool newBest = false;
 
+  private Highscores hscores;
+
   //===================================================================================================================
 
   private void Start() {
     GameObject hsObj = GameObject.Find("High Score(Clone)");
     if(!hsObj) hsObj = (GameObject)Instantiate(highPrefab);
     hs = hsObj.GetComponent<HighTracker>();
+    hscores = GameObject.Find("Highscores").GetComponent<Highscores>();
 
     fader = transform.Find("Fader").GetComponent<Image>();
     cooldown = transform.Find("Cooldown").GetComponent<Image>();
@@ -36,8 +44,18 @@ public class UIScript : MonoBehaviour {
 
     backButton = transform.Find("Back Button").gameObject;
     againButton = transform.Find("Again Button").gameObject;
+    submitButton = transform.Find("Submit").gameObject;
+    noThanksButton = transform.Find("NoThanks").gameObject;
+    inputField = transform.Find("InputField").gameObject;
+    champName = transform.Find("InputField/Text").GetComponent<Text>();
+    inputField.SetActive(false);
     backButton.SetActive(false);
     againButton.SetActive(false);
+    noThanksButton.SetActive(false);
+    inputField.SetActive(false);
+    submitButton.SetActive(false);
+
+    finalScoreText.text = "";
 
     fader.color = Color.black;
     StartCoroutine(fadeIn());
@@ -97,12 +115,31 @@ public class UIScript : MonoBehaviour {
     cooldown.enabled = false;
     scoreText.enabled = false;
 
+    if(hscores.gotScores && score > hscores.lowestScore) {
+      //Do top scores thing here.
+      submitButton.SetActive(true);
+      noThanksButton.SetActive(true);
+      inputField.SetActive(true);
+      backButton.SetActive(true);
+      newBest = false;
+      finalScoreText.text = "<color=cyan>Final Score: " + zerorize(score) + "\nWow! You're a world champ!\nSubmit your name to the highscores:\n\n</color>";
+      return;
+    }
+
     if(newBest) finalScoreText.text = "<color=yellow>New record!\nFinal Score: " + zerorize(score) + "</color>\nClick to Restart";
     else finalScoreText.text = "Final Score: " + zerorize(score) + "\nClick to Restart";
     newBest = false;
     scoreText.text = "Best: " + zerorize(hs.HighScore) + "\nScore: " + zerorize(0);
     backButton.SetActive(true);
     againButton.SetActive(true);
+  }
+
+  //===================================================================================================================
+
+  public void submitScore() {
+    if(champName.text == "") return;
+    hscores.AddNewHighscore(champName.text, score);
+    clickAgain();
   }
 
   //===================================================================================================================
@@ -136,6 +173,10 @@ public class UIScript : MonoBehaviour {
     finalScoreText.text = "";
     backButton.SetActive(false);
     againButton.SetActive(false);
+
+    submitButton.SetActive(false);
+    noThanksButton.SetActive(false);
+    inputField.SetActive(false);
   }
 	
   //===================================================================================================================
