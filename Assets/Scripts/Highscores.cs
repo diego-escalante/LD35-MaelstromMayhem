@@ -4,9 +4,9 @@ using System.Collections;
 
 public class Highscores : MonoBehaviour {
 
-  private const string privateCode = "PUT PRIVATE CODE HERE";
+  private const string privateCode = "ENTER PRIVATE CODE HERE";
   private const string publicCode = "571c5d436e51b60f8852abe8";
-  private const string webURL = "https://dreamlo.com/lb/";
+  private const string webURL = "https://www.dreamlo.com/lb/";
 
   public Highscore[] highscoresList;
 
