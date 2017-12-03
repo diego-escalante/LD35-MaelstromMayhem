@@ -1,4 +1,7 @@
 # Maelstrom Mayhem
+
+### [Play Maelstrom Mayhem here!](http://diego-escalante.github.io/LD35-MaelstromMayhem/)
+
 This repo houses Maelstrom Mayhem, a game originally made in 72 hours for Ludum Dare 35.
 
 #### Getting Up and Running
