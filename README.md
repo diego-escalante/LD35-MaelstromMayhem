@@ -1,17 +1,34 @@
 # Maelstrom Mayhem
 
-### [Play Maelstrom Mayhem here!](http://diego-escalante.github.io/LD35-MaelstromMayhem/)
+<p align="center">
+  <picture>
+    <source srcset="../assets/gameplay.png?raw=true">
+    <img alt="Shows a png with a snippet of gameplay." src="../assets/gameplay.png?raw=true">
+  </picture>
+</p>
 
-This repo houses Maelstrom Mayhem, a game originally made in 72 hours for Ludum Dare 35.
+## [Play the game here!](https://diego-escalante.itch.io/maelstrom-mayhem)
+This game was made in 72 hours for the Ludum Dare 35 jam. The theme of the jam was "Shapeshift." It was made with Unity. 
 
-#### Getting Up and Running
+## Links
+* [Maelstrom Mayhem on itch.io](https://diego-escalante.itch.io/maelstrom-mayhem): Play the game directly on your browser here.
+* [Jam Submission Page](http://ludumdare.com/compo/ludum-dare-35/?action=preview&uid=46754): Feedback on the game by other participants can be found here.
 
-1. Make sure you have [Unity](http://unity3d.com/unity/download "Download Unity"). Maelstrom Mayhem was made with Unity version 5.3.4f1.
+## Setting Up the Project Locally
+1. Make sure you have Unity version 5.6.3p2 installed, as that is the version of the engine that was used for this game. You can get it from the [Unity Hub](https://unity.com/download).
+2. Clone this repo in your desired directory: `git clone https://github.com/diego-escalante/LD35-MaelstromMayhem.git`
+3. Start up the Unity Hub. Open the project and ensure that the editor version 5.6.3p2 is selected for the project.
+4. One the engine opens up the project, you can run the game by opening up the main scene and pressing the Play button in the top center.
 
-2. Clone this repo.
-
-4. Start up Unity, and open the game's project folder. It's that easy. You're done.
-
-#### Ludum Dare Entry
-
-This game was originally made for Ludum Dare 35 in three days. It was built around the theme *Shapeshift*. You can play the original game, as it was submitted, [here](http://ludumdare.com/compo/ludum-dare-35/?action=preview&uid=46754). Or you can dive into the original project on [this branch](https://github.com/diego-escalante/LudumDare35/tree/LD35_version) of the repo.
+## Rankings
+The game received the following rankings in the game jam:
+| Category   | Rank (out of 1593 entries)|
+|-----------:|:--------------------------|
+| Overall    | 610                       |
+| Fun        | 372                       |
+| Innovation | 382                       |
+| Theme      | 537                       |
+| Graphics   | 575                       |
+| Audio      | 726                       |
+| Humor      | 675                       |
+| Mood       | 483                       |
