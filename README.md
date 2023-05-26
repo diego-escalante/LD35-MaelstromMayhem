@@ -8,7 +8,7 @@
 </p>
 
 ## [Play the game here!](https://diego-escalante.itch.io/maelstrom-mayhem)
-This game was made in 72 hours for the Ludum Dare 35 jam. The theme of the jam was "Shapeshift." It was made with Unity. 
+This game was made in 72 hours for the Ludum Dare 35 jam in April 2016. The theme of the jam was "Shapeshift." It was made with Unity. 
 
 ## Links
 * [Maelstrom Mayhem on itch.io](https://diego-escalante.itch.io/maelstrom-mayhem): Play the game directly on your browser here.
